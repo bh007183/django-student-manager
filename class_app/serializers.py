@@ -1,18 +1,25 @@
 from rest_framework import serializers
-from .models import Student, Subject, Assignment, Grade
+from .models import Student, Subject, Assignment, Grade, Class
+
+
+
+class ClassSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Class
+        fields = ["id", "class_grade", "teacher"]
+    
+
 
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ["id", 'first_name', 'last_name']
+        fields = ["id", 'first_name', 'last_name', "classes"]
 
-   
-    
 
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
-        fields = ["title", "assignment", "student"]
+        fields = ["title", "student"]
     # student = StudentSerializer()
 
 class AssignmentSerializer(serializers.ModelSerializer):
