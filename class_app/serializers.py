@@ -8,13 +8,10 @@ class ClassSerializer(serializers.ModelSerializer):
         model = Class
         fields = ["id", "class_grade", "teacher"]
     
-
-
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ["id", 'first_name', 'last_name', "classes"]
-
 
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
