@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from './pages/Home'
-import PublicNav from './components/PublicNav'
+import Nav from './components/Nav'
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,8 +17,10 @@ function App() {
     <Router>
       <Routes>
         
-        <Route path="/" element={<PublicNav/>}/>
+        <Route path="/" element={<Nav/>}/>
         <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Home/>}/>
+        <Route path="/create-account" element={<Home/>}/>
       </Routes>
     </Router>
       

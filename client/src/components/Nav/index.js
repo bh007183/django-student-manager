@@ -9,17 +9,15 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { styled, useTheme } from '@mui/material/styles'
 import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar from '@mui/material/AppBar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import LoginIcon from '@mui/icons-material/Login';
+import AddIcon from '@mui/icons-material/Add';
+import {Link} from "react-router-dom"
 
 const drawerWidth = 240;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -51,11 +49,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
   }));
 export default function PublicNav() {
-
-    const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-  
-
   
 
     const handleDrawerOpen = () => {
@@ -73,11 +67,11 @@ export default function PublicNav() {
                 Class Manager
               </Typography>
               <Hidden mdDown>
-              <Button color="inherit">Login</Button>
-              <Button color="inherit">Create Account</Button>
+                <Link className="button-link" button to="/login">LOGIN</Link>
+                <Link className="button-link" to="/create-account">CREATE ACCOUNT</Link>
               </Hidden>
               <Hidden mdUp>
-              <Button onClick={handleDrawerOpen} color="inherit">small</Button>
+              <Button onClick={handleDrawerOpen} color="inherit"><MenuIcon/></Button>
               </Hidden>
             </Toolbar>
           </AppBar>
@@ -90,6 +84,7 @@ export default function PublicNav() {
             boxSizing: 'border-box',
           },
         }}
+        id="drawer"
         variant="persistent"
         anchor="right"
         open={open}
@@ -101,12 +96,12 @@ export default function PublicNav() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Login', 'Create Account'].map((text, index) => (
-            <ListItem button key={text}>
+          {[{text:'Login', path: "/login", icon: <LoginIcon/>}, {text:'Create Account', path:"/create-account",icon: <AddIcon/>}].map((obj, index) => (
+            <ListItem className="button-link" component={Link} to={obj.path} button key={obj.text}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+               {obj.icon}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={obj.text} />
             </ListItem>
           ))}
         </List>
