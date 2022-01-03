@@ -67,7 +67,7 @@ export default function PublicNav() {
                 Class Manager
               </Typography>
               <Hidden mdDown>
-                <Link className="button-link" button to="/login">LOGIN</Link>
+                <Link className="button-link" button to="/entry">LOGIN</Link>
                 <Link className="button-link" to="/create-account">CREATE ACCOUNT</Link>
               </Hidden>
               <Hidden mdUp>
@@ -96,7 +96,7 @@ export default function PublicNav() {
         </DrawerHeader>
         <Divider />
         <List>
-          {[{text:'Login', path: "/login", icon: <LoginIcon/>}, {text:'Create Account', path:"/create-account",icon: <AddIcon/>}].map((obj, index) => (
+          {[{text:'Login', path: "/entry", icon: <LoginIcon/>}, {text:'Create Account', path:"/create-account",icon: <AddIcon/>}].map((obj, index) => (
             <ListItem className="button-link" component={Link} to={obj.path} button key={obj.text}>
               <ListItemIcon>
                {obj.icon}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 from .validators import validate_grade
 
 # Create your models here.
@@ -33,6 +34,7 @@ class Class(models.Model):
     ]
     class_grade = models.CharField(max_length=4, choices=GRADE_OPTIONS, null=True)
     teacher = models.CharField(max_length=255)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 class Student(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)

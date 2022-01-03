@@ -1,5 +1,11 @@
 from rest_framework import serializers
 from .models import Student, Subject, Assignment, Grade, Class
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
+
+class UserCreateSerializer(BaseUserCreateSerializer):
+    class Meta(BaseUserCreateSerializer.Meta):
+        fields = ["id", "username", "password", "email", "first_name", "last_name"]
+
 
 
 
@@ -17,20 +23,19 @@ class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
         fields = ["title", "student"]
-    # student = StudentSerializer()
+  
 
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assignment
         fields = ["title", "module", "subject"]
-    # subject = SubjectSerializer()
+  
 
 class GradeSerializer(serializers.ModelSerializer):
     class Meta:
         model   = Grade
         fields = ["grade_status", "grade", "assignment"]
-    # assignment = AssignmentSerializer()
-
+  
 
    
 

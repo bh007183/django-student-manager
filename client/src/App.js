@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/Home'
 import Nav from './components/Nav'
+import CreateLogin from './pages/CreateLogin'
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,12 +16,12 @@ function App() {
     <>
     
     <Router>
+    <Nav/>
       <Routes>
         
-        <Route path="/" element={<Nav/>}/>
         <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Home/>}/>
-        <Route path="/create-account" element={<Home/>}/>
+        <Route path="/entry" element={<CreateLogin/>}/>
+       
       </Routes>
     </Router>
       

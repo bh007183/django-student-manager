@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework",
+    "djoser",
     "debug_toolbar",
     "class_app",
+    
   
 ]
 
@@ -141,5 +143,17 @@ INTERNAL_IPS = [
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
-    'COERCE_DECIMAL_TO_STRING': False
+    'COERCE_DECIMAL_TO_STRING': False,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+}
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'class_app.serializers.UserCreateSerializer'
+    }
 }
