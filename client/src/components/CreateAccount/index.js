@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { handleInput } from "../../Utils";
 import Grid from "@mui/material/Grid";
-import "./style.css";
 import FormControl from "@mui/material/FormControl";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
@@ -40,8 +39,6 @@ export default function Login() {
   };
 
   return (
-    <>
-    <h1 className="center-h1">Login</h1>
     <form
       className="center-from align-center entry-from"
       onSubmit={handleSubmit}
@@ -84,6 +81,5 @@ export default function Login() {
         </Grid>
       </Grid>
     </form>
-    </>
   );
 }

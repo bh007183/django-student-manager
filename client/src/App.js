@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Nav from './components/Nav'
 import Dashboard from './pages/Dashboard'
 import CreateLogin from './pages/CreateLogin'
+import Login from "./components/Login"
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,7 +21,7 @@ function App() {
     <Nav/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/entry" element={<CreateLogin/>}/>
+        <Route path="/entry" element={<Login/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
       </Routes>
     </Router>
