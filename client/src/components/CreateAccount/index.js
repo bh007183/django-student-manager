@@ -9,7 +9,7 @@ import Error from "../Error"
 import { Navigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { teacherLogin, reset_error } from "../../app/classSlice";
+import { accountCreate, reset_error } from "../../app/classSlice";
 
 export default function Login() {
   const error = useSelector(store => store.Class.Error)
@@ -20,6 +20,7 @@ export default function Login() {
   const [loginState, setLoginState] = useState({
     username: "",
     password: "",
+    email: ""
   });
 
   useEffect(() => {
@@ -35,10 +36,12 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(teacherLogin(loginState));
+    dispatch(accountCreate(loginState));
   };
-
+ console.log(error)
   return (
+      <>
+       <h1 className="center-h1">Create Account</h1>
     <form
       className="center-from align-center entry-from"
       onSubmit={handleSubmit}
@@ -46,7 +49,7 @@ export default function Login() {
       
       <Grid container spacing={2}>
       <Grid className="align-center" item xs={12}>
-      {error ? <Error message={error.detail}/> : <></>}
+      {error ? <Error/> : <></>}
       </Grid>
         <Grid className="align-center" item xs={12}>
           <FormControl>
@@ -58,6 +61,19 @@ export default function Login() {
               placeholder="Username"
               name="username"
               value={loginState.username}
+            />
+          </FormControl>
+        </Grid>
+        <Grid className="align-center" item xs={12}>
+          <FormControl>
+            <InputLabel htmlFor="my-input">Email</InputLabel>
+            <Input
+              onChange={(event) =>
+                handleInput(event, loginState, setLoginState)
+              }
+              placeholder="Email"
+              name="email"
+              value={loginState.email}
             />
           </FormControl>
         </Grid>
@@ -76,10 +92,11 @@ export default function Login() {
         </Grid>
         <Grid className="align-center" item xs={12}>
           <Button id="login-button" variant="contained" type="submit">
-            Login
+            Create Account
           </Button>
         </Grid>
       </Grid>
     </form>
+    </>
   );
 }

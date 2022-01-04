@@ -2,8 +2,9 @@ import React from 'react';
 import Home from './pages/Home'
 import Nav from './components/Nav'
 import Dashboard from './pages/Dashboard'
-import CreateLogin from './pages/CreateLogin'
+
 import Login from "./components/Login"
+import CreateAccount from "./components/CreateAccount"
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/entry" element={<Login/>}/>
+        <Route path="/create-account" element={<CreateAccount/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
       </Routes>
     </Router>

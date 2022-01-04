@@ -55,5 +55,12 @@ data,
 onSuccess: logged_in.type,
 onError: set_error.type
 })
+export const accountCreate = (data) => start({
+url: "http://127.0.0.1:8000/auth/users/",
+method: "POST",
+data,
+onSuccess: logged_in.type,
+onError: set_error.type
+})
 
 
