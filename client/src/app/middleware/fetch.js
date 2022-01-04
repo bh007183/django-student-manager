@@ -14,12 +14,11 @@ export const api = ({dispatch}) => next => async action => {
             onError
         })
         dispatch(actions.success(response.data))
-        console.log(response.data)
         if(onSuccess)dispatch({type: onSuccess, payload: response.data})
 
     }catch(error){
+    
         dispatch(actions.error(error.response))
-        console.log(response.data)
         if(onError)dispatch({type: onError, payload: error.response})
 
     }

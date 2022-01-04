@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/Home'
 import Nav from './components/Nav'
+import Dashboard from './pages/Dashboard'
 import CreateLogin from './pages/CreateLogin'
 import {
   BrowserRouter as Router,
@@ -18,10 +19,9 @@ function App() {
     <Router>
     <Nav/>
       <Routes>
-        
         <Route path="/" element={<Home/>}/>
         <Route path="/entry" element={<CreateLogin/>}/>
-       
+        <Route path="/dashboard" element={<Dashboard/>}/>
       </Routes>
     </Router>
       

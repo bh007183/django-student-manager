@@ -4,6 +4,7 @@ import {start} from "./custom-actions"
 
 
 
+
 export const slice = createSlice({
   name: 'Admin',
   initialState: {
@@ -20,16 +21,23 @@ export const slice = createSlice({
     },
     set_error: (Admin, action) => {
       console.log(action)
+      Admin.Error = action.payload.data
     },
+    reset_error: (Admin, action) => {
+      Admin.Error = ""
+
+    },
+
     logged_in: (Admin, action) => {
       console.log(action)
        Admin.LoggedIn = true
+       localStorage.setItem("token", `bearer ${action.payload.access}`)
     }
    
   },
 });
 
-export const { set_teacher_class, set_error, logged_in} = slice.actions;
+export const {set_teacher_class, set_error, logged_in, reset_error} = slice.actions;
 export default slice.reducer;
 
 // export const login = () => start({
@@ -42,6 +50,7 @@ onError: set_error.type
 })
 export const teacherLogin = (data) => start({
 url: "http://127.0.0.1:8000/auth/jwt/create",
+method: "POST",
 data,
 onSuccess: logged_in.type,
 onError: set_error.type
