@@ -1,13 +1,30 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework import status
-from .serializers import StudentSerializer, SubjectSerializer, ClassSerializer, AssignmentSerializer
+from .serializers import UserProfileSerializer, StudentSerializer, SubjectSerializer, ClassSerializer, AssignmentSerializer
 
-from .models import Student, Subject, Assignment, Grade, Class
+from .models import UserProfile as User, Student, Subject, Assignment, Grade, Class
 
 # Create your views here.
 # Student Views
+
+class UserProfileDetail(APIView):
+    def get(self, request, pk):
+        profile = get_object_or_404(User, pk=pk)
+        
+        serializer = UserProfileSerializer(profile)
+        print(serializer.classes.all())
+        return Response(serializer.data)
+
+class UserProfile(APIView):
+    def post(self, request):
+        serializer = UserProfileSerializer(data = request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
 
 class ClassDetail(APIView):
     def get(self, request, pk):
@@ -33,10 +50,13 @@ class ClassList(APIView):
         serializer = ClassSerializer(queryset, many=True)
         return Response(serializer.data)
     def post(self, request):
+        print(request.data)
         serializer = ClassSerializer(data = request.data)
         serializer.is_valid(raise_exception=True) #
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
 
 
 class StudentDetail(APIView):

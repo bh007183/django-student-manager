@@ -31,13 +31,17 @@ export const slice = createSlice({
     logged_in: (Admin, action) => {
       console.log(action)
        Admin.LoggedIn = true
-       localStorage.setItem("token", `bearer ${action.payload.access}`)
+       localStorage.setItem("token", `JWT ${action.payload.access}`)
+    }, 
+
+    set_user: (Admin, action) => {
+      console.log(action.payload)
     }
    
   },
 });
 
-export const {set_teacher_class, set_error, logged_in, reset_error} = slice.actions;
+export const {set_teacher_class, set_error, logged_in, reset_error, set_user} = slice.actions;
 export default slice.reducer;
 
 // export const login = () => start({
@@ -60,6 +64,14 @@ url: "http://127.0.0.1:8000/auth/users/",
 method: "POST",
 data,
 onSuccess: logged_in.type,
+onError: set_error.type
+})
+export const getUser = (data) => start({
+url: "http://127.0.0.1:8000/auth/users/me/",
+headers: {
+  authorization: localStorage.getItem('token')
+},
+onSuccess: set_user.type,
 onError: set_error.type
 })
 
