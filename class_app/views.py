@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from .serializers import  StudentSerializer, SubjectSerializer, ClassSerializer, AssignmentSerializer
 
 from .models import  Student, Subject, Assignment, Grade, Class
@@ -14,6 +15,7 @@ from .models import  Student, Subject, Assignment, Grade, Class
 
 
 class ClassDetail(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, pk):
         classes = get_object_or_404(Class,pk=pk)
         serializer = ClassSerializer(classes)
@@ -32,8 +34,10 @@ class ClassDetail(APIView):
 
 
 class ClassList(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
-        queryset = Class.objects.all()
+        queryset = Class.objects.filter(user_id=request.user.id)
+        print(queryset)
         serializer = ClassSerializer(queryset, many=True)
         return Response(serializer.data)
     def post(self, request):
@@ -47,6 +51,7 @@ class ClassList(APIView):
 
 
 class StudentDetail(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, pk):
         student = get_object_or_404(Student,pk=pk)
         serializer = StudentSerializer(student)
@@ -65,8 +70,11 @@ class StudentDetail(APIView):
 
 
 class StudentList(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
-        queryset = Student.objects.all()
+        print(request)
+        # trying to filter by param
+        queryset = Student.objects.filter(class_id=request.GET.get('pk', None))
         serializer = StudentSerializer(queryset, many=True)
         return Response(serializer.data)
     def post(self, request):

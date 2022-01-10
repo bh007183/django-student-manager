@@ -9,16 +9,14 @@ export const slice = createSlice({
   name: 'Admin',
   initialState: {
     LoggedIn: false,
-    Class: "",
+    Classes: [],
+    Students: [],
     Teacher: "",
     Error: "",
   },
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    set_teacher_class: (Admin, action) => {
-      console.log(action.payload)
-     
-    },
+    
     set_error: (Admin, action) => {
       console.log(action)
       Admin.Error = action.payload.data
@@ -26,6 +24,13 @@ export const slice = createSlice({
     reset_error: (Admin, action) => {
       Admin.Error = ""
 
+    },
+    set_classes: (Admin, action) => {
+      console.log(action.payload)
+      Admin.Classes = action.payload
+    },
+    set_students: (Admin, action) => {
+      Admin.Students = action.payload
     },
 
     logged_in: (Admin, action) => {
@@ -41,7 +46,7 @@ export const slice = createSlice({
   },
 });
 
-export const {set_teacher_class, set_error, logged_in, reset_error, set_user} = slice.actions;
+export const { set_error, logged_in, reset_error, set_user, set_classes, set_students} = slice.actions;
 export default slice.reducer;
 
 // export const login = () => start({
@@ -49,7 +54,18 @@ export default slice.reducer;
 // })
 export const getClass = () => start({
 url: "http://127.0.0.1:8000/api/class",
-onSuccess: set_teacher_class.type,
+headers: {
+  authorization: localStorage.getItem('token')
+},
+onSuccess: set_classes.type,
+onError: set_error.type
+})
+export const getStudents = (id) => start({
+url: "http://127.0.0.1:8000/api/student/byclass/" + id,
+headers: {
+  authorization: localStorage.getItem('token')
+},
+onSuccess: set_students.type,
 onError: set_error.type
 })
 export const teacherLogin = (data) => start({
@@ -74,5 +90,6 @@ headers: {
 onSuccess: set_user.type,
 onError: set_error.type
 })
+
 
 
