@@ -4,40 +4,35 @@ import {getUser, getClass} from "../../app/classSlice"
 import ClassCard from "../../components/ClassCard"
 import {Link, Route, Routes} from "react-router-dom"
 import CreateClass from '../../components/CreateClass'
+import ViewClasses from '../../components/ViewClasses'
 
 export default function Dashboard() {
     const dispatch = useDispatch()
-    const classes = useSelector(state => state.Class.Classes)
+    
    useEffect(() => {
       dispatch(getClass())
        return () => {
            
        }
    }, [])
-   console.log(classes)
+   
     return (
         <div>
              <div className="classBar">
-                 <Link to="/dashboard/add" style={{color: 'white', textDecoration: 'none'}}>
+                 <Link to="/dashboard/add" style={{color: 'white', textDecoration: 'none', paddingLeft: "10px", paddingRight: "10px"}}>
                  Add Class
+                 </Link>
+                 <Link to="/dashboard" style={{color: 'white', textDecoration: 'none'}}>
+                 Dashboard
                  </Link>
             
         </div>
         <Routes>
         <Route exact path="add" element={<CreateClass/>}/>
+        <Route exact path="/" element={<ViewClasses/>}/>
         </Routes>
         
-            <div className="align-center">
-           <h1>Your Classes</h1>
-           </div>
-           <div>
-               <div>hi</div>
-               {classes.length > 0 ? classes.map(item => (
-                <ClassCard class={item}/>
-               )
-               ): <p>You have not created any classes. Click <Link to="/dashboard/add">here</Link> to add a class.</p>}
             
-            </div>
         </div>
     )
 }

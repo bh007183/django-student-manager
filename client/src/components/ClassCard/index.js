@@ -10,7 +10,7 @@ import {Link} from "react-router-dom"
 export default function ClassCard(props) {
     console.log(props)
     return (
-    <Card sx={{minWidth: 275, maxWidth: 300, minHeight:200}}>
+    <Card sx={{minWidth: 275, maxWidth: 300, minHeight:200}} style={{margin: "10px"}}>
       <CardContent className="align-center">
           <h2>{props.class.class_grade}</h2>
       </CardContent>

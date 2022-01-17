@@ -11,13 +11,13 @@ class UserCreateSerializer(BaseUserCreateSerializer):
 class ClassSerializer(serializers.ModelSerializer):
     class Meta:
         model = Class
-        fields = ["id", "class_grade", "teacher", "user"]
+        fields = ["id", "class_grade", "title", "user"]
 
     
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ["id", 'first_name', 'last_name', "classes"]
+        fields = ["id", 'first_name', 'last_name', "classes", "guardian_name_1", "guardian_name_2", "emergency_contact_number1", "emergency_contact_number2" ]
 
 
   

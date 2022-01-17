@@ -13,6 +13,7 @@ export const slice = createSlice({
     Students: [],
     Teacher: "",
     Error: "",
+    Success: ""
   },
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -21,11 +22,20 @@ export const slice = createSlice({
       console.log(action)
       Admin.Error = action.payload.data
     },
+    set_success: (Admin, action) => {
+      Admin.Success = true
+
+    },
+
     set_student: (Admin, action) => {
       console.log(action.payload)
     },
     reset_error: (Admin, action) => {
       Admin.Error = ""
+
+    },
+    reset_success: (Admin, action) => {
+      Admin.Success = ""
 
     },
     set_classes: (Admin, action) => {
@@ -50,7 +60,7 @@ export const slice = createSlice({
   },
 });
 
-export const { set_error, logged_in, reset_error, set_user, set_classes, set_students, set_student} = slice.actions;
+export const { set_error, logged_in, reset_success, set_success, reset_error, set_user, set_classes, set_students, set_student} = slice.actions;
 export default slice.reducer;
 
 // export const login = () => start({
@@ -101,6 +111,17 @@ headers: {
 },
 onSuccess: set_user.type,
 onError: set_error.type
+})
+
+export const createClass = (data) => start({
+  url: "http://127.0.0.1:8000/api/class/",
+  method: 'POST',
+  headers: {
+    authorization: localStorage.getItem('token')
+  },
+  data,
+  onSuccess: set_success.type,
+  onError: set_error.type
 })
 
 

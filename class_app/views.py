@@ -41,7 +41,7 @@ class ClassList(APIView):
         serializer = ClassSerializer(queryset, many=True)
         return Response(serializer.data)
     def post(self, request):
-        print(request.data)
+        request.data["user"] = request.user.id
         serializer = ClassSerializer(data = request.data)
         serializer.is_valid(raise_exception=True) #
         serializer.save()
