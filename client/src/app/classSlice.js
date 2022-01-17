@@ -21,6 +21,9 @@ export const slice = createSlice({
       console.log(action)
       Admin.Error = action.payload.data
     },
+    set_student: (Admin, action) => {
+      console.log(action.payload)
+    },
     reset_error: (Admin, action) => {
       Admin.Error = ""
 
@@ -30,6 +33,7 @@ export const slice = createSlice({
       Admin.Classes = action.payload
     },
     set_students: (Admin, action) => {
+      console.log(action.payload)
       Admin.Students = action.payload
     },
 
@@ -46,7 +50,7 @@ export const slice = createSlice({
   },
 });
 
-export const { set_error, logged_in, reset_error, set_user, set_classes, set_students} = slice.actions;
+export const { set_error, logged_in, reset_error, set_user, set_classes, set_students, set_student} = slice.actions;
 export default slice.reducer;
 
 // export const login = () => start({
@@ -66,6 +70,14 @@ headers: {
   authorization: localStorage.getItem('token')
 },
 onSuccess: set_students.type,
+onError: set_error.type
+})
+export const getStudent = (id) => start({
+url: "http://127.0.0.1:8000/api/student/" + id,
+headers: {
+  authorization: localStorage.getItem('token')
+},
+onSuccess: set_student.type,
 onError: set_error.type
 })
 export const teacherLogin = (data) => start({

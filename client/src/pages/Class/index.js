@@ -1,6 +1,10 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getStudents} from "../../app/classSlice"
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import StudentHorizontal from "../../components/StudentHorizontal"
+import "./style.css"
 
 export default function Class() {
     const dispatch = useDispatch() 
@@ -14,12 +18,18 @@ export default function Class() {
     }, [])
     return (
         <>
-        <div>
+        <div id="classBar">
             Manage Bar
         </div>
-        <section>
-
-        </section>
+        <h1>Student Manage Portal</h1>
+        <div id="studentBox" >
+      
+          {students.map(student => (
+              <StudentHorizontal student={student}/>
+          ))}
+        
+     
+    </div>
         </>
     )
 }

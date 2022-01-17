@@ -1,0 +1,10 @@
+.studentCard{
+    width: 40%;
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+    justify-content: space-between;
+    background-image: linear-gradient(to right, rgb(211, 211, 211) , rgb(163, 163, 163));
+    border-radius: 10px;
+    margin: 5px;
+}
