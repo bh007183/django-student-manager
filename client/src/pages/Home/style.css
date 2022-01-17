@@ -1,0 +1,11 @@
+#entryCard{
+    width: 50vw;
+    height: 50vh;
+    background-image: linear-gradient(to bottom, rgb(153, 153, 153), rgb(226, 226, 226));
+    border-radius: 10px;
+    padding: 20px
+    
+}
+#entryCard p {
+    font-size: 18px;
+}

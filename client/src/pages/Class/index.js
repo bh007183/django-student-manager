@@ -18,7 +18,7 @@ export default function Class() {
     }, [])
     return (
         <>
-        <div id="classBar">
+        <div className="classBar">
             Manage Bar
         </div>
         <h1>Student Manage Portal</h1>
