@@ -30,11 +30,13 @@ export default function Class() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    let route = window.location.pathname.split("/")
+
     const dispatch = useDispatch() 
     const students = useSelector(state => state.Class.Students)
 
     useEffect(() => {
-        dispatch(getStudents(window.location.pathname[window.location.pathname.length - 1]))
+        dispatch(getStudents(route[route.length - 1]))
         return () => {
             
         }

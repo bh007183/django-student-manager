@@ -10,18 +10,19 @@ import { Navigate } from "react-router-dom";
 
 
 import { useDispatch, useSelector } from "react-redux";
-import { accountCreate, reset_error, createStudent } from "../../app/classSlice";
+import { accountCreate, reset_error, createStudent, updateStudent } from "../../app/classSlice";
 
 export default function CreateStudent() {
   const error = useSelector(store => store.Class.Error)
-  
+  const student = useSelector(store => store.Class.Student)
+ let route = window.location.pathname.split("/")
 
 
   const dispatch = useDispatch();
   const [state, setState] = useState({
     first_name: "",
     last_name: "",
-    classes: Number(window.location.pathname[window.location.pathname.length - 1]),
+    classes: Number(route[route.length - 1]),
     guardian_name_1: "",
     guardian_name_2: "",
     emergency_contact_number1: "",
@@ -30,16 +31,30 @@ export default function CreateStudent() {
   });
 
   useEffect(() => {
+    if(student){
+      console.log(student)
+      setState({
+        ...student
+      })
+    }
     return () => {
       dispatch(reset_error())
     }
+    
   }, [])
 
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createStudent(state))
+    if(!student){
+      dispatch(createStudent(state))
+    }else{
+      console.log(window.location.pathname.split("/")[1])
+      dispatch(updateStudent(state))
+    }
+ 
+    
     
   };
 

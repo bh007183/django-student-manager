@@ -57,12 +57,15 @@ export const slice = createSlice({
 
     set_user: (Admin, action) => {
       console.log(action.payload)
+    },
+    go_back: (Admin, action) => {
+      window.history.back()
     }
    
   },
 });
 
-export const { set_error, logged_in, reset_success, set_success, reset_error, set_user, set_classes, set_students, set_student} = slice.actions;
+export const { set_error, go_back, logged_in, reset_success, set_success, reset_error, set_user, set_classes, set_students, set_student} = slice.actions;
 export default slice.reducer;
 
 // export const login = () => start({
@@ -128,6 +131,26 @@ export const createClass = (data) => start({
 export const createStudent = (data) => start({
   url: "http://127.0.0.1:8000/api/student/",
   method: 'POST',
+  headers: {
+    authorization: localStorage.getItem('token')
+  },
+  data,
+  onSuccess: set_success.type,
+  onError: set_error.type
+})
+
+export const deleteStudent = (id) => start({
+  url: "http://127.0.0.1:8000/api/student/" + id,
+  method: 'DELETE',
+  headers: {
+    authorization: localStorage.getItem('token')
+  },
+  onSuccess: go_back.type,
+  onError: set_error.type
+})
+export const updateStudent = (data) => start({
+  url: "http://127.0.0.1:8000/api/student/"+ window.location.pathname.split("/")[2] + "/",
+  method: 'PUT',
   headers: {
     authorization: localStorage.getItem('token')
   },
