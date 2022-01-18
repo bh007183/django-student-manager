@@ -11,6 +11,7 @@ export const slice = createSlice({
     LoggedIn: false,
     Classes: [],
     Students: [],
+    Student: "",
     Teacher: "",
     Error: "",
     Success: ""
@@ -29,6 +30,7 @@ export const slice = createSlice({
 
     set_student: (Admin, action) => {
       console.log(action.payload)
+      Admin.Student = action.payload
     },
     reset_error: (Admin, action) => {
       Admin.Error = ""
