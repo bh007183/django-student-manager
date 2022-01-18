@@ -123,6 +123,16 @@ export const createClass = (data) => start({
   onSuccess: set_success.type,
   onError: set_error.type
 })
+export const createStudent = (data) => start({
+  url: "http://127.0.0.1:8000/api/student/",
+  method: 'POST',
+  headers: {
+    authorization: localStorage.getItem('token')
+  },
+  data,
+  onSuccess: set_success.type,
+  onError: set_error.type
+})
 
 
 
