@@ -20,16 +20,15 @@ export const slice = createSlice({
   reducers: {
     
     set_error: (Admin, action) => {
-      console.log(action)
       Admin.Error = action.payload.data
     },
     set_success: (Admin, action) => {
+      console.log(action.payload)
       Admin.Success = true
 
     },
 
     set_student: (Admin, action) => {
-      console.log(action.payload)
       Admin.Student = action.payload
     },
     reset_error: (Admin, action) => {
@@ -50,7 +49,6 @@ export const slice = createSlice({
     },
 
     logged_in: (Admin, action) => {
-      console.log(action)
        Admin.LoggedIn = true
        localStorage.setItem("token", `JWT ${action.payload.access}`)
     }, 

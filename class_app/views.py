@@ -58,7 +58,8 @@ class StudentDetail(APIView):
         return Response(serializer.data)
     def put(self, request, pk):
         student = get_object_or_404(Student,pk=pk)
-        serializer = StudentSerializer(student, data = request.data)
+      
+        serializer = StudentSerializer(student, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)

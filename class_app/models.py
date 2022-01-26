@@ -18,10 +18,10 @@ class Student(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     classes = models.ForeignKey(Class, on_delete=models.PROTECT)
-    guardian_name_1 = models.CharField(max_length=255, null=True)
-    guardian_name_2 = models.CharField(max_length=255, null=True)
-    emergency_contact_number1 = models.CharField( max_length=10, validators=[RegexValidator(regex='^.{10}$', message='Phone number must have 10 digits', code='nomatch')], null=True)
-    emergency_contact_number2 = models.CharField( max_length=10, validators=[RegexValidator(regex='^.{10}$', message='Phone number must have 10 digits', code='nomatch')], null=True)
+    guardian_name_1 = models.CharField(max_length=255, null=True, blank=True)
+    guardian_name_2 = models.CharField(max_length=255, null=True, blank=True)
+    emergency_contact_number1 = models.CharField( max_length=10, validators=[RegexValidator(regex='^.{10}$', message='Phone number must have 10 digits', code='nomatch')], null=True, blank=True)
+    emergency_contact_number2 = models.CharField( max_length=10, validators=[RegexValidator(regex='^.{10}$', message='Phone number must have 10 digits', code='nomatch')], null=True, blank=True)
 
 
 

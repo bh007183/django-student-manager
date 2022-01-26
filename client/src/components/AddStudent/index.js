@@ -50,12 +50,8 @@ export default function CreateStudent() {
     if(!student){
       dispatch(createStudent(state))
     }else{
-      console.log(window.location.pathname.split("/")[1])
       dispatch(updateStudent(state))
     }
- 
-    
-    
   };
 
   return (
@@ -149,9 +145,12 @@ export default function CreateStudent() {
           </FormControl>
         </Grid>
         <Grid className="align-center" item xs={12}>
-          <Button id="login-button" variant="contained" type="submit">
-            Add Student
-          </Button>
+          {!student ? <Button id="login-button" variant="contained" type="submit">
+          Add Student
+          </Button>: <Button id="login-button" variant="contained" type="submit">
+            Update Student
+          </Button>}
+         
         </Grid>
       </Grid>
     </form>
